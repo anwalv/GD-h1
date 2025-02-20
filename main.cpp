@@ -287,7 +287,89 @@ double clamp(double const minVal, double const maxVal, double const value) {
     }
 }
 
+bool isEqualWithPrecision(float const x, float const y, float const precision){
+    uint32_t bytesX= toBytes(x);
+    uint32_t bytesY= toBytes(y);
+    uint32_t bytesPre= toBytes(precision);
+    uint32_t diff = bytesX > bytesY ? bytesX - bytesY : bytesY - bytesX;
+    return diff <= bytesPre;
+}
+
+bool isEqualWithPrecision(double const x, double const y, double const precision){
+    uint64_t bytesX= toBytes(x);
+    uint64_t bytesY= toBytes(y);
+    uint64_t bytesPre= toBytes(precision);
+    uint64_t diff = bytesX > bytesY ? bytesX - bytesY : bytesY - bytesX;
+    return diff <= bytesPre;
+}
+
+bool isEqual(float const x, float const y) {
+    uint32_t bytesX = toBytes(x);
+    uint32_t bytesY = toBytes(y);
+    return bytesX == bytesY;
+}
+
+bool isEqual(double x, double y) {
+    uint64_t bytesX = toBytes(x);
+    uint64_t bytesY = toBytes(y);
+    return bytesX == bytesY;
+}
+
+bool isLessWithPrecision(float const x, float const y, float const precision){
+    uint32_t bytesX= toBytes(x);
+    uint32_t bytesY= toBytes(y);
+    uint32_t bytesPre= toBytes(precision);
+    uint32_t diff = bytesX > bytesY ? bytesX - bytesY : bytesY - bytesX;
+    return diff > bytesPre && bytesX < bytesY;
+}
+
+bool isLessWithPrecision(double const x, double const y, double const precision){
+    uint64_t bytesX= toBytes(x);
+    uint64_t bytesY= toBytes(y);
+    uint64_t bytesPre= toBytes(precision);
+    uint64_t diff = bytesX > bytesY ? bytesX - bytesY : bytesY - bytesX;
+    return diff > bytesPre && bytesX < bytesY;
+}
+
+bool isLessThan(float x, float y) {
+    uint32_t bytesX = toBytes(x);
+    uint32_t bytesY = toBytes(y);
+    return bytesX < bytesY;
+}
+
+bool isLessThan(double x, double y) {
+    uint64_t bytesX = toBytes(x);
+    uint64_t bytesY = toBytes(y);
+    return bytesX < bytesY;
+}
+
+bool isGreaterThanWithPrecision(float x, float y, float precision) {
+    uint32_t bytesX= toBytes(x);
+    uint32_t bytesY= toBytes(y);
+    uint32_t bytesPre= toBytes(precision);
+    uint32_t diff = bytesX > bytesY ? bytesX - bytesY : bytesY - bytesX;
+    return diff > bytesPre && bytesX > bytesY;
+}
+
+bool isGreaterThanWithPrecision(double const x, double const y, double const precision){
+    uint64_t bytesX= toBytes(x);
+    uint64_t bytesY= toBytes(y);
+    uint64_t bytesPre= toBytes(precision);
+    uint64_t diff = bytesX > bytesY ? bytesX - bytesY : bytesY - bytesX;
+    return diff > bytesPre && bytesX > bytesY;
+}
+
+bool isGreaterThan(float x, float y) {
+    uint32_t bytesX = toBytes(x);
+    uint32_t bytesY = toBytes(y);
+    return bytesX > bytesY;
+}
+bool isGreaterThan(double x, double y) {
+    uint64_t bytesX = toBytes(x);
+    uint64_t bytesY = toBytes(y);
+    return bytesX > bytesY;
+}
+
 
 int main() {
-
 }
