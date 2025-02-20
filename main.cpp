@@ -202,36 +202,92 @@ int classify(double const x) {
     }
 }
 
+float absoluteValue(float const x) {
+    uint32_t bytes = toBytes(x);
+    bytes = bytes & 0x7FFFFFFF;
+    return toFloat(bytes);
+}
+
+double absoluteValue(double const x) {
+    uint64_t bytes = toBytes(x);
+    bytes = bytes & 0x7FFFFFFFFFFFFFFF;
+    return toDouble(bytes);
+}
+
+float minValue(float const x, float const y) {
+    uint32_t bytesX = toBytes(x);
+    uint32_t bytesY = toBytes(y);
+
+    bool isXLessThanY = (bytesX < bytesY);
+    if (isXLessThanY) {
+        return toFloat(bytesX);
+    } else {
+        return toFloat(bytesY);
+    }
+}
+
+float maxValue(float const x, float const y) {
+    uint32_t bytesX = toBytes(x);
+    uint32_t bytesY = toBytes(y);
+
+    bool isXGreaterThanY = (bytesX > bytesY);
+    if (isXGreaterThanY) {
+        return toFloat(bytesX);
+    } else {
+        return toFloat(bytesY);
+    }
+}
+
+double minValue(double const x, double const y) {
+    uint64_t bytesX = toBytes(x);
+    uint64_t bytesY = toBytes(y);
+
+    bool isXLessThanY = (bytesX < bytesY);
+    if (isXLessThanY) {
+        return toDouble(bytesX);
+    } else {
+        return toDouble(bytesY);
+    }
+}
+
+double maxValue(double const x, double const y) {
+    uint64_t bytesX = toBytes(x);
+    uint64_t bytesY = toBytes(y);
+    bool isXGreaterThanY = (bytesX > bytesY);
+    if (isXGreaterThanY) {
+        return toDouble(bytesX);
+    } else {
+        return toDouble(bytesY);
+    }
+}
+
+float clamp(float const minVal, float const maxVal, float const value) {
+    uint32_t minBytes = toBytes(minVal);
+    uint32_t maxBytes = toBytes(maxVal);
+    uint32_t valueBytes = toBytes(value);
+    if (valueBytes < minBytes) {
+        return toFloat(minBytes);
+    } else if (valueBytes > maxBytes) {
+        return toFloat(maxBytes);
+    } else {
+        return toFloat(valueBytes);
+    }
+}
+
+double clamp(double const minVal, double const maxVal, double const value) {
+    uint64_t minBytes = toBytes(minVal);
+    uint64_t maxBytes = toBytes(maxVal);
+    uint64_t valueBytes = toBytes(value);
+    if (valueBytes < minBytes) {
+        return toDouble(minBytes);
+    } else if (valueBytes > maxBytes) {
+        return toDouble(maxBytes);
+    } else {
+        return toDouble(valueBytes);
+    }
+}
+
+
 int main() {
-    float num1 = 3.14f;
-    float num2 = -3.14f;
-    float num3 = 0.0f;
-    float num4 = -0.0f;
-    float num5 = std::numeric_limits<float>::infinity();
-    float num6 = -std::numeric_limits<float>::infinity();
-    float num7 = std::numeric_limits<float>::quiet_NaN();
-    double num8 = 3.14;
-    double num9 = -3.14;
-    double num10 = 0.0;
-    double num11 = -0.0;
-    double num12 = std::numeric_limits<double>::infinity();
-    double num13 = -std::numeric_limits<double>::infinity();
-    double num14 = std::numeric_limits<double>::quiet_NaN();
 
-    std::cout << "Classify num1 (float): " << classify(num1) << std::endl;
-    std::cout << "Classify num2 (float): " << classify(num2) << std::endl;
-    std::cout << "Classify num3 (float): " << classify(num3) << std::endl;
-    std::cout << "Classify num4 (float): " << classify(num4) << std::endl;
-    std::cout << "Classify num5 (float): " << classify(num5) << std::endl;
-    std::cout << "Classify num6 (float): " << classify(num6) << std::endl;
-    std::cout << "Classify num7 (float): " << classify(num7) << std::endl;
-    std::cout << "Classify num8 (double): " << classify(num8) << std::endl;
-    std::cout << "Classify num9 (double): " << classify(num9) << std::endl;
-    std::cout << "Classify num10 (double): " << classify(num10) << std::endl;
-    std::cout << "Classify num11 (double): " << classify(num11) << std::endl;
-    std::cout << "Classify num12 (double): " << classify(num12) << std::endl;
-    std::cout << "Classify num13 (double): " << classify(num13) << std::endl;
-    std::cout << "Classify num14 (double): " << classify(num14) << std::endl;
-
-    return 0;
 }
